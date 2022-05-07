@@ -1,6 +1,4 @@
-package jade;
-
-import lombok.Getter;
+package Jade;
 
 import static org.lwjgl.glfw.GLFW.GLFW_PRESS;
 import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;

@@ -1,11 +1,11 @@
-package jade;
+package Jade;
 
 import static org.lwjgl.glfw.GLFW.GLFW_PRESS;
 import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
 
 public class KeyListener {
     private static KeyListener instance;
-    private boolean KeyPressed[] = new boolean[350];
+    private boolean[] KeyPressed = new boolean[350];
 
     private KeyListener() {
 
