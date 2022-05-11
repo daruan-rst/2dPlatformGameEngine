@@ -5,9 +5,10 @@ layout (location=1) in vec4 aColor;
 
 out vec4 fColor;
 
-void main(){
+void main()
+{
     fColor = aColor;
-    gl_Position=vec4(aPos,1.0);
+    gl_Position = vec4(aPos, 1.0);
 }
 
 #type fragment
@@ -17,6 +18,7 @@ in vec4 fColor;
 
 out vec4 color;
 
-void main(){
+void main()
+{
     color = fColor;
 }
