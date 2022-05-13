@@ -1,5 +1,6 @@
 package Jade;
 
+import Renderer.Shader;
 import org.lwjgl.BufferUtils;
 
 import java.nio.FloatBuffer;
@@ -59,61 +60,17 @@ public class LevelEditorScene extends Scene {
 
     private int vaoID, vboID, eboID;
 
+    private Shader defaultShader;
     public LevelEditorScene(){
 
     }
 
     @Override
     public void init(){
-        //Compile and link the shaders
 
-        //First load and compile vertex shader
-        vertexID = glCreateShader(GL_VERTEX_SHADER);
+        defaultShader = new Shader("Assets/Shaders/default.glsl");
+        defaultShader.compile();
 
-        //Pass the shader source to the GPU
-        glShaderSource(vertexID, vertexShaderSrc);
-        glCompileShader(vertexID);
-
-        //check for errors in compilation process
-        int success = glGetShaderi(vertexID, GL_COMPILE_STATUS);
-        if (success == GL_FALSE){
-            int len = glGetShaderi(vertexID, GL_INFO_LOG_LENGTH);
-            System.err.println("ERROR: 'defaultShader.glsl'\n\tVertex shader compilation failed");
-            System.out.println(glGetShaderInfoLog(vertexID, len));
-            assert false : "";
-        }
-
-        //First load and compile fragment shader
-        fragmentID = glCreateShader(GL_FRAGMENT_SHADER);
-
-        //Pass the shader source to the GPU
-        glShaderSource(fragmentID, fragmentShaderSrc);
-        glCompileShader(fragmentID);
-
-        //check for errors in compilation process
-        success = glGetShaderi(fragmentID, GL_COMPILE_STATUS);
-        if (success == GL_FALSE){
-            int len = glGetShaderi(fragmentID, GL_INFO_LOG_LENGTH);
-            System.err.println("ERROR: 'defaultShader.glsl'\n\tFragment shader compilation failed");
-            System.out.println(glGetShaderInfoLog(fragmentID, len));
-            assert false : "";
-        }
-
-        //Link Shaders and checkfor errors
-
-        shaderProgram = glCreateProgram();
-        glAttachShader(shaderProgram, vertexID);
-        glAttachShader(shaderProgram, fragmentID);
-        glLinkProgram(shaderProgram);
-
-        //Check linking errors
-        success = glGetProgrami(shaderProgram, GL_LINK_STATUS);
-        if(success == GL_FALSE){
-            int len = glGetProgrami(shaderProgram, GL_INFO_LOG_LENGTH);
-            System.err.println("ERROR: 'defaultShader.glsl'\n\tLinking shaders failed");
-            System.out.println(glGetProgramInfoLog(shaderProgram, len));
-            assert false : "";
-        }
 
         //▙▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▟\\
         //  Generate VAO, VBO and EBO buffer objects and send to the GPU   \\
@@ -154,8 +111,8 @@ public class LevelEditorScene extends Scene {
 
     @Override
     public void update(float dt) {
-        //Bind shader program
-        glUseProgram(shaderProgram);
+
+        defaultShader.use();
         //Bind the VAP that we're using
         glBindVertexArray(vaoID);
 
@@ -171,6 +128,6 @@ public class LevelEditorScene extends Scene {
 
         glBindVertexArray(0);
 
-        glUseProgram(0);
+        defaultShader.detach();
     }
 }
