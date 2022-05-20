@@ -1,5 +1,6 @@
 package Jade;
 
+import Components.SpriteRenderer;
 import Renderer.Shader;
 import Renderer.Texture;
 import Util.Time;
@@ -19,10 +20,10 @@ public class LevelEditorScene extends Scene {
 
     private float[] vertexArray = {
             //vertices first            //color second            //UV Coordinates
-            100.5f, 0.5f, 0.0f,         1.0f, 0.0f, 0.0f, 1.0f,   1,1,   // Bottom right 0
-            0.5f,  100.5f, 0.0f,        0.0f, 1.0f, 0.0f, 1.0f,   0,0,   // Top left     1
-            100.5f,  100.5f, 0.0f ,     1.0f, 0.0f, 1.0f, 1.0f,   1,0,   // Top right    2
-            0.5f, 0.5f, 0.0f,           1.0f, 1.0f, 0.0f, 1.0f,   0,1    // Bottom left  3
+            100.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1, 1,   // Bottom right 0
+            0.5f, 100.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0, 0,   // Top left     1
+            100.5f, 100.5f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 1, 0,   // Top right    2
+            0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f, 0, 1    // Bottom left  3
     };
 
     //IMPORTANT: Must be in counter-clockwise order
@@ -33,8 +34,8 @@ public class LevelEditorScene extends Scene {
 
                     x       x
              */
-        2,1,0, // Top Right Triangle
-        0,1,3 // Bottom Left Triangle
+            2, 1, 0, // Top Right Triangle
+            0, 1, 3 // Bottom Left Triangle
 
     };
 
@@ -44,12 +45,20 @@ public class LevelEditorScene extends Scene {
 
     private Texture testTexture;
 
-    public LevelEditorScene(){
+    GameObject testObj;
+    private boolean firstTime = false;
+
+    public LevelEditorScene() {
 
     }
 
     @Override
-    public void init(){
+    public void init() {
+        System.out.println("Creating 'test object'");
+        this.testObj = new GameObject("test Object");
+        this.testObj.addComponent(new SpriteRenderer());
+        this.addGameObjectToScene(this.testObj);
+
         this.camera = new Camera(new Vector2f());
         defaultShader = new Shader("Assets/Shaders/default.glsl");
         defaultShader.compile();
@@ -85,11 +94,11 @@ public class LevelEditorScene extends Scene {
         int colorSize = 4;
 
         int uvSize = 2;
-        int vertexSizeBytes = (positionsSize + colorSize +uvSize) * Float.BYTES;
+        int vertexSizeBytes = (positionsSize + colorSize + uvSize) * Float.BYTES;
         glVertexAttribPointer(0, positionsSize, GL_FLOAT, false, vertexSizeBytes, 0);
         glEnableVertexAttribArray(0);
 
-        glVertexAttribPointer(1, colorSize, GL_FLOAT, false, vertexSizeBytes, positionsSize*Float.BYTES);
+        glVertexAttribPointer(1, colorSize, GL_FLOAT, false, vertexSizeBytes, positionsSize * Float.BYTES);
         glEnableVertexAttribArray(1);
 
         glVertexAttribPointer(2, uvSize, GL_FLOAT, false, vertexSizeBytes, (positionsSize + colorSize) * Float.BYTES);
@@ -98,7 +107,7 @@ public class LevelEditorScene extends Scene {
 
     @Override
     public void update(float dt) {
-        camera.position.x -= dt*50.0f;
+        camera.position.x -= dt * 50.0f;
 
         defaultShader.use();
 
@@ -118,7 +127,7 @@ public class LevelEditorScene extends Scene {
         glEnableVertexAttribArray(0);
         glEnableVertexAttribArray(1);
 
-        glDrawElements(GL_TRIANGLES, elementArray.length, GL_UNSIGNED_INT,0);
+        glDrawElements(GL_TRIANGLES, elementArray.length, GL_UNSIGNED_INT, 0);
 
         // Unbind Everything
         glDisableVertexAttribArray(0);
@@ -127,5 +136,17 @@ public class LevelEditorScene extends Scene {
         glBindVertexArray(0);
 
         defaultShader.detach();
+
+        if (!firstTime) {
+            System.out.println("Creating gameObject");
+            GameObject go = new GameObject("Game Test 2");
+            go.addComponent(new SpriteRenderer());
+            this.addGameObjectToScene(go);
+            firstTime = true;
+        }
+
+        for (GameObject g : this.gameObjects) {
+            g.update(dt);
+        }
     }
 }
