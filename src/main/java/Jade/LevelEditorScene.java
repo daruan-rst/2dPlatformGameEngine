@@ -1,5 +1,6 @@
 package Jade;
 
+import Components.FontRenderer;
 import Components.SpriteRenderer;
 import Renderer.Shader;
 import Renderer.Texture;
@@ -57,6 +58,7 @@ public class LevelEditorScene extends Scene {
         System.out.println("Creating 'test object'");
         this.testObj = new GameObject("test Object");
         this.testObj.addComponent(new SpriteRenderer());
+        this.testObj.addComponent(new FontRenderer());
         this.addGameObjectToScene(this.testObj);
 
         this.camera = new Camera(new Vector2f());
