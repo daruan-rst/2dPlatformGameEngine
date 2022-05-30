@@ -56,6 +56,10 @@ public class Window {
        return Window.window == null ? Window.window = new Window() : window;
     }
 
+    public static Scene getScene(){
+        return get().currentScene;
+    }
+
     public void run(){
         System.out.println("LWJGL " + Version.getVersion());
         init();
