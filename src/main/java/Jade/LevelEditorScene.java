@@ -1,6 +1,7 @@
 package Jade;
 
 import Components.SpriteRenderer;
+import Util.AssetPool;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 
@@ -30,7 +31,11 @@ public class LevelEditorScene extends Scene {
             }
         }
 
+        loadResources();
+    }
 
+    private void loadResources(){
+        AssetPool.getShader("Assets/Shaders/default.glsl");
     }
 
     @Override
