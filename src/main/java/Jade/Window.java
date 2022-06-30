@@ -2,6 +2,7 @@ package Jade;
 
 
 import org.lwjgl.Version;
+import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
 
@@ -74,6 +75,8 @@ public class Window {
     }
 
     public void init(){
+        System.out.println("Hello LWJGL " + Version.getVersion() + "!");
+        System.out.println(org.lwjgl.glfw.GLFW.glfwGetVersionString());
         //Setup an error callback
         GLFWErrorCallback.createPrint(System.err).set();
 
@@ -128,7 +131,9 @@ public class Window {
             glClear(GL_COLOR_BUFFER_BIT);
 
             if (dt>=0){
-            currentScene.update(dt);}
+                System.out.println(dt);
+                currentScene.update(dt);
+            }
 
             glfwSwapBuffers(glfwWindow);
 
