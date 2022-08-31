@@ -1,6 +1,7 @@
 package Components;
 
 import Jade.Component;
+import Jade.Transform;
 import Renderer.Texture;
 import lombok.Getter;
 import org.joml.Vector2f;
@@ -11,6 +12,7 @@ public class SpriteRenderer extends Component {
 
     private Vector4f color;
     private Sprite sprite;
+    private Transform lastTransform;
 
     public SpriteRenderer(Vector4f color) {
         this.color = color;
@@ -24,7 +26,7 @@ public class SpriteRenderer extends Component {
 
     @Override
     public void start() {
-
+        this.lastTransform = gameObject.transform.copy();
     }
 
     @Override
@@ -42,4 +44,12 @@ public class SpriteRenderer extends Component {
 
     public Vector2f[] getTexCoords() {
         return  sprite.getTexCoords();}
+
+    public void setSprite(Sprite sprite){
+        this.sprite = sprite;
+    }
+
+    public void setColor(Vector4f color){
+        this.color.set(color);
+    }
 }
