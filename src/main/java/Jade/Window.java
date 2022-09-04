@@ -28,9 +28,9 @@ public class Window {
         this.width = 1920;
         this.height = 1080;
         this.title = "Platform";
-        r=1;
-        b=1;
-        g=1;
+        r=0.7f;
+        b=0.2f;
+        g=0.1f;
         a=1;
     }
 
