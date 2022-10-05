@@ -3,6 +3,7 @@ package Jade;
 import Components.Sprite;
 import Components.SpriteRenderer;
 import Components.Spritesheet;
+import Renderer.Texture;
 import Util.AssetPool;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
@@ -18,25 +19,25 @@ public class LevelEditorScene extends Scene {
     public void init() {
         loadResources();
 
-        this.camera = new Camera(new Vector2f());
+        this.camera = new Camera(new Vector2f(-250, 0));
 
         sprites = AssetPool.getSpritesheet("Assets/Images/spritesheet.png");
 
-        obj1 = new GameObject("Object1 ",
-                            new Transform(
-                                new Vector2f(100,100),
-                                new Vector2f(256,256)));
-        obj1.addComponent(new SpriteRenderer((sprites.getSprite(0))));
+        obj1 = new GameObject("Object 1", new Transform(new Vector2f(200, 100),
+                new Vector2f(256, 256)), 2);
+        obj1.addComponent(new SpriteRenderer(new Sprite(
+                AssetPool.getTexture("Assets/Images/blendImage1.png")
+        )));
         this.addGameObjectToScene(obj1);
 
-        GameObject obj2 = new GameObject("Object2 ",
-                new Transform(
-                        new Vector2f(400,100),
-                        new Vector2f(256,256)));
-        obj1.addComponent(new SpriteRenderer((sprites.getSprite(10))));
+        GameObject obj2 = new GameObject("Object 2",
+                new Transform(new Vector2f(400, 100), new Vector2f(256, 256)), 3);
+        obj2.addComponent(new SpriteRenderer(new Sprite(
+                AssetPool.getTexture("Assets/Images/blendImage2.png")
+        )));
         this.addGameObjectToScene(obj2);
-
     }
+
 
     private void loadResources(){
         AssetPool.getShader("Assets/Shaders/default.glsl");
@@ -49,16 +50,6 @@ public class LevelEditorScene extends Scene {
     private float spriteFlipTime = 0.2f;
     private float spriteFlipTimeLeft = 0.0f;
     public void update(float dt) {
-        obj1.transform.position.x += 10 * dt;
-        spriteFlipTimeLeft -= dt;
-        if (spriteFlipTimeLeft <= 0){
-            spriteFlipTimeLeft = spriteFlipTime;
-            spriteIndex++;
-            if (spriteIndex > 4){
-                spriteIndex = 0;
-            }
-            obj1.getComponent(SpriteRenderer.class).setSprite(sprites.getSprite(spriteIndex));
-        }
 
         for (GameObject go : this.gameObjects) {
             go.update(dt);
