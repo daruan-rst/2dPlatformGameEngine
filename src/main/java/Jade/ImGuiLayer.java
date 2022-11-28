@@ -150,28 +150,10 @@ public class ImGuiLayer {
         // Glyphs could be added per-font as well as per config used globally like here
         fontConfig.setGlyphRanges(fontAtlas.getGlyphRangesDefault());
 
-        // Add a default font, which is 'ProggyClean.ttf, 13px'
-        fontAtlas.addFontDefault();
-
         // Fonts merge example
-        fontConfig.setMergeMode(true); // When enabled, all fonts added with this config would be merged with the previously added font
-        fontConfig.setPixelSnapH(true);
+         fontConfig.setPixelSnapH(true);
+         fontAtlas.addFontFromFileTTF("Assets/Fonts/segoeui.ttf", 32, fontConfig);
 
-        //fontAtlas.addFontFromMemoryTTF(loadFromResources("basis33.ttf"), 16, fontConfig);
-
-        fontConfig.setMergeMode(false);
-        fontConfig.setPixelSnapH(false);
-
-        // Fonts from file/memory example
-        // We can add new fonts from the file system
-        //fontAtlas.addFontFromFileTTF("src/test/resources/Righteous-Regular.ttf", 14, fontConfig);
-        //fontAtlas.addFontFromFileTTF("src/test/resources/Righteous-Regular.ttf", 16, fontConfig);
-
-        // Or directly from the memory
-        //fontConfig.setName("Roboto-Regular.ttf, 14px"); // This name will be displayed in Style Editor
-        //fontAtlas.addFontFromMemoryTTF(loadFromResources("Roboto-Regular.ttf"), 14, fontConfig);
-        //fontConfig.setName("Roboto-Regular.ttf, 16px"); // We can apply a new config value every time we add a new font
-        //fontAtlas.addFontFromMemoryTTF(loadFromResources("Roboto-Regular.ttf"), 16, fontConfig);
 
         fontConfig.destroy(); // After all fonts were added we don't need this config more
 
