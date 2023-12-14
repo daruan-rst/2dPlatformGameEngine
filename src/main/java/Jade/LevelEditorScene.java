@@ -5,6 +5,7 @@ import Components.SpriteRenderer;
 import Components.Spritesheet;
 import Renderer.Texture;
 import Util.AssetPool;
+import imgui.ImGui;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 
@@ -56,5 +57,12 @@ public class LevelEditorScene extends Scene {
         }
 
         this.renderer.render();
+    }
+
+    @Override
+    public void imgui(){
+        ImGui.begin("Test window");
+        ImGui.text("Some random text");
+        ImGui.end();
     }
 }
