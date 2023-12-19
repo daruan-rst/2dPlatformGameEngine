@@ -61,6 +61,10 @@ public class Texture {
 
     }
 
+    public void init(){
+
+    }
+
     public void bind() {
         glBindTexture(GL_TEXTURE_2D, texID);
     }
