@@ -17,6 +17,7 @@ public class LevelEditorScene extends Scene {
 
     private GameObject obj1;
     private Spritesheet sprites;
+    private SpriteRenderer obj1Sprite;
 
     @Override
     public void init() {
@@ -28,7 +29,8 @@ public class LevelEditorScene extends Scene {
 
         obj1 = new GameObject("Object 1", new Transform(new Vector2f(200, 100),
                 new Vector2f(256, 256)), 2);
-        SpriteRenderer obj1Sprite = new SpriteRenderer();
+//        SpriteRenderer obj1Sprite = new SpriteRenderer();
+        obj1Sprite = new SpriteRenderer();
         obj1Sprite.setColor(new Vector4f(1,0,0,1));
         obj1.addComponent(obj1Sprite);
         this.addGameObjectToScene(obj1);
@@ -47,7 +49,9 @@ public class LevelEditorScene extends Scene {
                 .setPrettyPrinting()
                 .create();
 
-//        System.out.println(gson.toJson("hello world :)"));
+        String serialized = gson.toJson(obj1);
+        System.out.println(serialized);
+        GameObject obj  = gson.fromJson(serialized, GameObject.class);
     }
 
 
