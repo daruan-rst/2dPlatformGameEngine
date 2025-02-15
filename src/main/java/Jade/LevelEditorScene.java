@@ -45,13 +45,13 @@ public class LevelEditorScene extends Scene {
         obj2.addComponent(obj2SpriteRenderer);
         this.addGameObjectToScene(obj2);
 
-        Gson gson = new GsonBuilder()
-                .setPrettyPrinting()
-                .create();
-
-        String serialized = gson.toJson(obj1);
-        System.out.println(serialized);
-        GameObject obj  = gson.fromJson(serialized, GameObject.class);
+//        Gson gson = new GsonBuilder()
+//                .setPrettyPrinting()
+//                .create();
+//
+//        String serialized = gson.toJson(obj1);
+//        System.out.println(serialized);
+//        GameObject obj  = gson.fromJson(serialized, GameObject.class);
     }
 
 
