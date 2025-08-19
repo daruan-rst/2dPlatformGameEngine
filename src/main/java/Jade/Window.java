@@ -2,7 +2,6 @@ package Jade;
 
 
 import org.lwjgl.Version;
-import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
 
@@ -35,22 +34,22 @@ public class Window {
         a=1;
     }
 
-    public static void changeScene(int newScene){
-        switch (newScene){
+    public static void changeScene(int newScene) {
+        switch (newScene) {
             case 0:
                 currentScene = new LevelEditorScene();
-                currentScene.init();
-                currentScene.start();
                 break;
             case 1:
                 currentScene = new LevelScene();
-                currentScene.init();
-                currentScene.start();
                 break;
             default:
-                assert false: "Unknown Scene '" + newScene + "'";
+                assert false : "Unknown scene '" + newScene + "'";
                 break;
         }
+
+        currentScene.load();
+        currentScene.init();
+        currentScene.start();
     }
 
     public static Window get(){
@@ -134,8 +133,7 @@ public class Window {
         float endTime;
         float dt = -1.0f;
 
-        currentScene.load();
-        while(!glfwWindowShouldClose(glfwWindow)){
+        while (!glfwWindowShouldClose(glfwWindow)){
             // Poll events
             glfwPollEvents();
 

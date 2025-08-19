@@ -14,7 +14,7 @@ public class SpriteRenderer extends Component {
     private Vector4f color = new Vector4f(1,1,1,1);
     private Sprite sprite = new Sprite();
     private transient Transform lastTransform;
-    private transient boolean isDirty = false;
+    private transient boolean isDirty = true;
 
 //    public SpriteRenderer(Vector4f color) {
 //        this.color = color;
@@ -37,7 +37,7 @@ public class SpriteRenderer extends Component {
     public void update(float dt) {
         if(!this.lastTransform.equals(this.gameObject.transform)){
             this.gameObject.transform.copy(this.lastTransform);
-            isDirty = true;
+            isDirty = false;
         }
     }
 
