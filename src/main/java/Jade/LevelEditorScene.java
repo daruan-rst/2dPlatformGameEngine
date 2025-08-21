@@ -28,7 +28,7 @@ public class LevelEditorScene extends Scene {
             return;
         }
 
-        sprites = AssetPool.getSpritesheet("assets/images/spritesheet.png");
+        sprites = AssetPool.getSpritesheet("Assets/Images/spritesheet.png");
 
         obj1 = new GameObject("Object 1", new Transform(new Vector2f(200, 100),
                 new Vector2f(256, 256)), 2);
@@ -43,20 +43,20 @@ public class LevelEditorScene extends Scene {
                 new Transform(new Vector2f(400, 100), new Vector2f(256, 256)), 3);
         SpriteRenderer obj2SpriteRenderer = new SpriteRenderer();
         Sprite obj2Sprite = new Sprite();
-        obj2Sprite.setTexture(AssetPool.getTexture("assets/images/blendImage2.png"));
+        obj2Sprite.setTexture(AssetPool.getTexture("Assets/Images/blendImage2.png"));
         obj2SpriteRenderer.setSprite(obj2Sprite);
         obj2.addComponent(obj2SpriteRenderer);
         this.addGameObjectToScene(obj2);
     }
 
     private void loadResources() {
-        AssetPool.getShader("assets/shaders/default.glsl");
+        AssetPool.getShader("Assets/Shaders/default.glsl");
 
         // TODO: FIX TEXTURE SAVE SYSTEM TO USE PATH INSTEAD OF ID
-        AssetPool.addSpritesheet("assets/images/spritesheet.png",
-                new Spritesheet(AssetPool.getTexture("assets/images/spritesheet.png"),
+        AssetPool.addSpritesheet("Assets/Images/spritesheet.png",
+                new Spritesheet(AssetPool.getTexture("Assets/Images/spritesheet.png"),
                         16, 16, 26, 0));
-        AssetPool.getTexture("assets/images/blendImage2.png");
+        AssetPool.getTexture("Assets/Images/blendImage2.png");
     }
 
     @Override
