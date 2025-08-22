@@ -40,7 +40,7 @@ public class Renderer {
             newBatch.start();
             batches.add(newBatch);
             newBatch.addSprite(sprite);
-            Collections.sort(batches, Collections.reverseOrder());
+            Collections.sort(batches);
         }
     }
 

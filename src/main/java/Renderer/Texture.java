@@ -13,7 +13,6 @@ public class Texture {
 
     private String filePath;
     private int texID;
-
     private int width, height;
 
 //    public Texture(String filePath) {
@@ -62,7 +61,6 @@ public class Texture {
         }
 
         stbi_image_free(image);
-
     }
 
     public void bind() {
@@ -74,11 +72,11 @@ public class Texture {
     }
 
     public int getWidth() {
-        return width;
+        return this.width;
     }
 
     public int getHeight() {
-        return height;
+        return this.height;
     }
 
 
