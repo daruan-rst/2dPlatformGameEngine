@@ -4,11 +4,9 @@ import Jade.Component;
 import Jade.Transform;
 import Renderer.Texture;
 import imgui.ImGui;
-import lombok.Getter;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 
-@Getter
 public class SpriteRenderer extends Component {
 
     private Vector4f color = new Vector4f(1,1,1,1);
@@ -22,9 +20,9 @@ public class SpriteRenderer extends Component {
 //        this.isDirty = true;
 //    }
 //
-//    public SpriteRenderer(Sprite sprite){
+//    public SpriteRenderer(Sprite sprite) {
 //        this.sprite = sprite;
-//        this.color = new Vector4f(1,1,1,1);
+//        this.color = new Vector4f(1, 1, 1, 1);
 //        this.isDirty = true;
 //    }
 
@@ -37,7 +35,7 @@ public class SpriteRenderer extends Component {
     public void update(float dt) {
         if(!this.lastTransform.equals(this.gameObject.transform)){
             this.gameObject.transform.copy(this.lastTransform);
-            isDirty = false;
+            isDirty = true;
         }
     }
 
