@@ -7,33 +7,44 @@ version '1.0-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
-    jcenter()
     mavenCentral()
+    maven {
+        url = uri('https://repo.huaweicloud.com/repository/maven')
+        content {
+            includeGroup 'io.imgui.java'
+        }
+    }
 }
 
 dependencies {
-//    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
 }
 
 project.ext.lwjglVersion = "3.2.3"
 project.ext.jomlVersion = "1.9.23"
-project.ext.lwjglNatives = "natives-windows"
 project.ext.imguiVersion = '1.76-0.9'
 
+def osName = System.getProperty('os.name').toLowerCase()
+def isWindows = osName.contains('windows')
+project.ext.lwjglNatives = isWindows ? "natives-windows" : "natives-linux"
+
 dependencies {
-    //GSON
+    // GSON
     implementation 'com.google.code.gson:gson:2.8.6'
 
     // ImGUI stuff
     implementation "io.imgui.java:binding:$imguiVersion"
     implementation "io.imgui.java:lwjgl3:$imguiVersion"
-    implementation 'org.projectlombok:lombok:1.18.28'
 
     // Include all available natives, but it's likely that you want something specific
-    runtimeOnly "io.imgui.java:natives-windows:$imguiVersion"
+    if (isWindows) {
+        runtimeOnly "io.imgui.java:natives-windows:$imguiVersion"
+    } else {
+        runtimeOnly files("libs/natives-linux-${imguiVersion}.jar")
+    }
 
 
-    // LWJGL stuff
+     // LWJGL stuff
     implementation platform("org.lwjgl:lwjgl-bom:$lwjglVersion")
 
     implementation "org.lwjgl:lwjgl"
